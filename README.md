@@ -774,11 +774,7 @@ Then a * 2 = {a[2], a[1], a[0], 0}    ← Just append a zero at LSB
 
 No gates needed — only **wire connections**.
 
-**Synthesis — Yosys Output & Block Diagram:**
-
-![mul2 — multiply by 2 synthesizes to wire shift, no cells needed](./results/flop_12.png)
-
-**Result:** `Number of cells: 0`. Yosys optimizes this to a simple wire concatenation. The `abc` pass reports: *"Don't call ABC as there is nothing to map"* — the entire "multiplier" is just routing.
+**Synthesis Result:** `Number of cells: 0`. Yosys optimizes this to a simple wire concatenation. The `abc` pass reports: *"Don't call ABC as there is nothing to map"* — the entire "multiplier" is just routing. The block diagram shows only input and output ports with direct wire connections — `a[2:0]` maps to `y[3:1]`, and `y[0]` is tied to constant `1'b0`.
 
 ---
 

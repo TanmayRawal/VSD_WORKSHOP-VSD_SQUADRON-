@@ -571,8 +571,6 @@ abc -liberty ../my_lib/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 ```
 
-![Sub-module level synthesis — sub_module1 only](./results/hier_7.png)
-
 This strategy is used when:
 - The design is too large for monolithic synthesis
 - The same sub-module is instantiated multiple times — synthesize once, reuse

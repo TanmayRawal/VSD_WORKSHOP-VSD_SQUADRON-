@@ -1,6 +1,15 @@
-# VSD Squadron — RTL Design & Synthesis Assessment
+<h1 align="center">VSD Squadron — RTL Design & Synthesis Assessment</h1>
 
-> **Toolchain:** Icarus Verilog (Simulation) · GTKWave (Waveform Analysis) · Yosys (Synthesis) · SKY130 PDK (Standard Cell Library)
+<p align="center">
+  <b>12-Hour Hands-On Assessment: RTL Simulation, Logic Synthesis & Standard Cell Mapping<br/>using Icarus Verilog, GTKWave, Yosys & SkyWater 130nm PDK</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Assessment-12_Hour_Lab-critical?style=flat-square" alt="Assessment"/>
+  <img src="https://img.shields.io/badge/Tools-Icarus_Verilog_%7C_GTKWave_%7C_Yosys-2471A3?style=flat-square" alt="Tools"/>
+  <img src="https://img.shields.io/badge/PDK-SkyWater_130nm-F39C12?style=flat-square" alt="PDK"/>
+  <img src="https://img.shields.io/badge/Status-Completed-27AE60?style=flat-square" alt="Status"/>
+</p>
 
 ---
 
@@ -31,6 +40,21 @@ This repository documents the complete output of a **12-hour hands-on RTL Design
 - **Logic Synthesis** — Inputting the RTL code together with the SkyWater SKY130 standard cell library into Yosys to generate a gate-level netlist.
 
 The design modules intentionally cover different synthesis paradigms — combinational logic, hierarchical vs. flat netlists, sequential circuits with various reset styles, and arithmetic optimizations — providing a comprehensive view of front-end ASIC methodology.
+
+```mermaid
+flowchart LR
+    A["📝 RTL Design\n(Verilog)"] --> B["🧪 Simulation\n(Icarus Verilog)"]
+    B --> C["📊 Waveform\n(GTKWave)"]
+    A --> D["⚙️ Synthesis\n(Yosys)"]
+    D --> E["📋 Netlist\n(Gate-Level)"]
+    E --> F["✅ Verification\n(GLS)"]
+    style A fill:#6C3483,stroke:#4A235A,color:#fff
+    style B fill:#2471A3,stroke:#1A5276,color:#fff
+    style C fill:#1ABC9C,stroke:#148F77,color:#fff
+    style D fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style E fill:#E74C3C,stroke:#CB4335,color:#fff
+    style F fill:#27AE60,stroke:#1E8449,color:#fff
+```
 
 ---
 
@@ -163,6 +187,20 @@ VSD_INTERN_ASSESSMENT/
 
 ## Lab 1 — 2:1 Multiplexer (`good_mux`)
 
+```mermaid
+flowchart TD
+    subgraph Simulation Flow
+        TB["Testbench\n(tb_good_mux.v)"] -->|Drives Inputs| DUT["Design Under Test\n(good_mux.v)"]
+        DUT -->|Outputs| TB
+        TB -->|"$dumpfile / $dumpvars"| VCD["VCD File\n(.vcd)"]
+        VCD --> GTK["GTKWave\n(Waveform Viewer)"]
+    end
+    style TB fill:#8E44AD,stroke:#6C3483,color:#fff
+    style DUT fill:#2980B9,stroke:#1F618D,color:#fff
+    style VCD fill:#F39C12,stroke:#D68910,color:#fff
+    style GTK fill:#27AE60,stroke:#1E8449,color:#fff
+```
+
 ### 1.1 RTL Description
 
 ```verilog
@@ -228,6 +266,19 @@ Key observations from the waveform:
 ![Testbench and RTL source code in gvim](./results/part32.png)
 
 ### 1.4 Synthesis
+
+```mermaid
+flowchart LR
+    RTL["RTL Design\n(good_mux.v)"] --> YOSYS["Yosys Synthesizer"]
+    LIB[".lib\n(sky130_fd_sc_hd)"] --> YOSYS
+    YOSYS --> NET["Gate-Level Netlist\n(good_mux_netlist.v)"]
+    YOSYS --> SCH["Schematic\n(Dot Viewer)"]
+    style RTL fill:#3498DB,stroke:#2471A3,color:#fff
+    style LIB fill:#F39C12,stroke:#D68910,color:#fff
+    style YOSYS fill:#E74C3C,stroke:#CB4335,color:#fff
+    style NET fill:#27AE60,stroke:#1E8449,color:#fff
+    style SCH fill:#8E44AD,stroke:#6C3483,color:#fff
+```
 
 **Yosys Invocation:**
 
@@ -321,6 +372,21 @@ The `.lib` (Liberty) file is the foundation of technology-mapped synthesis. It c
 
 ### 2.1 PVT Corners & Library Naming
 
+```mermaid
+flowchart TD
+    PVT["PVT Corners"] --> P["Process\n(Fabrication Variations)"]
+    PVT --> V["Voltage\n(Supply Variation)"]
+    PVT --> T["Temperature\n(Operating Range)"]
+    P --> LIB["Library Characterization\n(sky130_fd_sc_hd__tt_025C_1v80.lib)"]
+    V --> LIB
+    T --> LIB
+    style PVT fill:#2C3E50,stroke:#1A252F,color:#fff
+    style P fill:#E74C3C,stroke:#CB4335,color:#fff
+    style V fill:#F39C12,stroke:#D68910,color:#fff
+    style T fill:#3498DB,stroke:#2471A3,color:#fff
+    style LIB fill:#27AE60,stroke:#1E8449,color:#fff
+```
+
 Standard cell libraries are characterized across **PVT (Process, Voltage, Temperature)** corners. The library name `sky130_fd_sc_hd__tt_025C_1v80` decodes as:
 
 | Segment | Meaning |
@@ -391,6 +457,24 @@ This confirms the **area-power-speed trade-off**: larger cells have wider transi
 ## Lab 3 — Multiple Modules: Hierarchy vs Flatten vs Submodule
 
 This lab demonstrates three distinct synthesis strategies for the same design and shows how each affects the resulting netlist and schematic.
+
+```mermaid
+flowchart LR
+    subgraph Hierarchical
+        H1["sub_module1\n(AND)"] --> H2["sub_module2\n(OR)"]
+    end
+    subgraph Flattened
+        F1["AND gate"] --> F2["OR gate"]
+    end
+    subgraph Submodule
+        S1["sub_module1\n(AND only)"]
+    end
+    style H1 fill:#3498DB,stroke:#2471A3,color:#fff
+    style H2 fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style F1 fill:#3498DB,stroke:#2471A3,color:#fff
+    style F2 fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style S1 fill:#3498DB,stroke:#2471A3,color:#fff
+```
 
 ### 3.1 RTL Description
 
@@ -506,6 +590,21 @@ This strategy is used when:
 ## Lab 4 — D Flip-Flops: Three Reset/Set Variants
 
 Sequential logic synthesis is fundamentally different from combinational. A flip-flop represents **state** — it holds its value between clock cycles. The type of reset/set mechanism directly determines which SKY130 cell Yosys selects.
+
+```mermaid
+flowchart LR
+    subgraph "Problem: Glitches"
+        COMB1["Combinational\nLogic"] -->|"Glitchy Output"| COMB2["Combinational\nLogic"]
+    end
+    subgraph "Solution: Flip-Flops"
+        COMB3["Combinational\nLogic"] --> FF["D Flip-Flop\n(Stabilizer)"] --> COMB4["Combinational\nLogic"]
+    end
+    style COMB1 fill:#E74C3C,stroke:#CB4335,color:#fff
+    style COMB2 fill:#E74C3C,stroke:#CB4335,color:#fff
+    style COMB3 fill:#27AE60,stroke:#1E8449,color:#fff
+    style FF fill:#3498DB,stroke:#2471A3,color:#fff
+    style COMB4 fill:#27AE60,stroke:#1E8449,color:#fff
+```
 
 ### Why DFFs Matter in Synthesis
 
@@ -640,6 +739,16 @@ When `sync_reset` goes HIGH, `q` only resets to `0` at the **next rising clock e
 ---
 
 ## Lab 5 — Special Case Arithmetic: Zero-Gate Multipliers
+
+```mermaid
+flowchart LR
+    A["a × 2"] -->|"Left shift by 1"| B["{a, 1'b0}\n0 gates"]
+    C["a × 9"] -->|"a×(8+1) = {a,a}"| D["{a, a}\n0 gates"]
+    style A fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style B fill:#27AE60,stroke:#1E8449,color:#fff
+    style C fill:#8E44AD,stroke:#6C3483,color:#fff
+    style D fill:#27AE60,stroke:#1E8449,color:#fff
+```
 
 This lab demonstrates one of the most important optimizations in digital design: **recognizing that certain arithmetic operations require zero logic gates**.
 

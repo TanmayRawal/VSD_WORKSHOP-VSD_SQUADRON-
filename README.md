@@ -459,21 +459,14 @@ This confirms the **area-power-speed trade-off**: larger cells have wider transi
 This lab demonstrates three distinct synthesis strategies for the same design and shows how each affects the resulting netlist and schematic.
 
 ```mermaid
-flowchart LR
-    subgraph Hierarchical
-        H1["sub_module1\n(AND)"] --> H2["sub_module2\n(OR)"]
-    end
-    subgraph Flattened
-        F1["AND gate"] --> F2["OR gate"]
-    end
-    subgraph Submodule
-        S1["sub_module1\n(AND only)"]
-    end
-    style H1 fill:#3498DB,stroke:#2471A3,color:#fff
-    style H2 fill:#E67E22,stroke:#CA6F1E,color:#fff
-    style F1 fill:#3498DB,stroke:#2471A3,color:#fff
-    style F2 fill:#E67E22,stroke:#CA6F1E,color:#fff
-    style S1 fill:#3498DB,stroke:#2471A3,color:#fff
+flowchart TD
+    A["multiple_modules.v"] -->|synth -top multiple_modules| HIER["🔷 Hierarchical Synthesis\nModule boundaries preserved"]
+    A -->|synth + flatten| FLAT["🔶 Flattened Synthesis\nAll boundaries dissolved"]
+    A -->|synth -top sub_module1| SUB["🔹 Submodule Synthesis\nOnly one module synthesized"]
+    style A fill:#2C3E50,stroke:#1A252F,color:#fff
+    style HIER fill:#2980B9,stroke:#1F618D,color:#fff
+    style FLAT fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style SUB fill:#8E44AD,stroke:#6C3483,color:#fff
 ```
 
 ### 3.1 RTL Description
@@ -592,13 +585,16 @@ This strategy is used when:
 Sequential logic synthesis is fundamentally different from combinational. A flip-flop represents **state** — it holds its value between clock cycles. The type of reset/set mechanism directly determines which SKY130 cell Yosys selects.
 
 ```mermaid
-flowchart LR
-    subgraph "Problem: Glitches"
-        COMB1["Combinational\nLogic"] -->|"Glitchy Output"| COMB2["Combinational\nLogic"]
+flowchart TD
+    subgraph problem ["❌ Without Flip-Flops"]
+        direction LR
+        COMB1["Combinational\nLogic"] -->|"Glitchy Output"| COMB2["Next Stage"]
     end
-    subgraph "Solution: Flip-Flops"
-        COMB3["Combinational\nLogic"] --> FF["D Flip-Flop\n(Stabilizer)"] --> COMB4["Combinational\nLogic"]
+    subgraph solution ["✅ With Flip-Flops"]
+        direction LR
+        COMB3["Combinational\nLogic"] --> FF["D Flip-Flop"] --> COMB4["Next Stage"]
     end
+    problem ~~~ solution
     style COMB1 fill:#E74C3C,stroke:#CB4335,color:#fff
     style COMB2 fill:#E74C3C,stroke:#CB4335,color:#fff
     style COMB3 fill:#27AE60,stroke:#1E8449,color:#fff

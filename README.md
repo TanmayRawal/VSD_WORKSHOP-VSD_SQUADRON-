@@ -1,76 +1,45 @@
-<p align="center">
-  <img src="https://www.vlsisystemdesign.com/wp-content/uploads/2016/12/vsd_logo.jpg" alt="VSD Logo" width="200"/>
-</p>
-
-<h1 align="center">VSD Squadron SoC Design & Synthesis Workshop</h1>
+<h1 align="center">VSD Squadron — RTL Design & Synthesis Assessment</h1>
 
 <p align="center">
-  <b>RTL Design, Simulation & Logic Synthesis using Open-Source EDA Tools on SkyWater 130nm PDK</b>
+  <b>12-Hour Hands-On Assessment: RTL Simulation, Logic Synthesis & Standard Cell Mapping<br/>using Icarus Verilog, GTKWave, Yosys & SkyWater 130nm PDK</b>
 </p>
 
 <p align="center">
-  <a href="#module-1-rtl-design--synthesis-workshop"><img src="https://img.shields.io/badge/Module_1-RTL_Design_&_Synthesis-blueviolet?style=for-the-badge" alt="Module 1"/></a>
-  <a href="#module-2-timing-libraries-hierarchical-synthesis--flop-coding-styles"><img src="https://img.shields.io/badge/Module_2-Timing_Libs_&_Flops-blueviolet?style=for-the-badge" alt="Module 2"/></a>
+  <a href="#module-1-rtl-simulation--logic-synthesis"><img src="https://img.shields.io/badge/Module_1-RTL_Simulation_&_Synthesis-6C3483?style=for-the-badge" alt="Module 1"/></a>
+  <a href="#module-2-timing-libraries-hierarchical-synthesis--flop-coding-styles"><img src="https://img.shields.io/badge/Module_2-Timing_Libs_&_Flops-E67E22?style=for-the-badge" alt="Module 2"/></a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Tools-Icarus_Verilog_%7C_GTKWave_%7C_Yosys-informational?style=flat-square&logo=verilog" alt="Tools"/>
-  <img src="https://img.shields.io/badge/PDK-SkyWater_130nm-orange?style=flat-square" alt="PDK"/>
-  <img src="https://img.shields.io/badge/Platform-VSD_Squadron-red?style=flat-square" alt="Platform"/>
-  <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square" alt="Status"/>
+  <img src="https://img.shields.io/badge/Assessment-12_Hour_Lab-critical?style=flat-square" alt="Assessment"/>
+  <img src="https://img.shields.io/badge/Tools-Icarus_Verilog_%7C_GTKWave_%7C_Yosys-2471A3?style=flat-square" alt="Tools"/>
+  <img src="https://img.shields.io/badge/PDK-SkyWater_130nm-F39C12?style=flat-square" alt="PDK"/>
+  <img src="https://img.shields.io/badge/Platform-VSD_Squadron-E74C3C?style=flat-square" alt="Platform"/>
+  <img src="https://img.shields.io/badge/Status-Completed-27AE60?style=flat-square" alt="Status"/>
 </p>
 
 ---
 
 ## 📋 Table of Contents
 
-- [About This Repository](#about-this-repository)
+- [About This Assessment](#about-this-assessment)
 - [Why Each File Type Matters](#-why-each-file-type-matters)
-- [Environment Setup & Toolchain](#-environment-setup--toolchain)
+- [Environment & Toolchain](#-environment-setup--toolchain)
 - [Design File Index](#-design-file-index)
-- [Module 1: RTL Design & Synthesis Workshop](#module-1-rtl-design--synthesis-workshop)
-  - [Day 1 — Introduction to Verilog RTL Design & Simulation](#day-1--introduction-to-verilog-rtl-design--simulation)
-    - [1.1 Lab: Environment Setup & File Exploration](#11-lab-environment-setup--file-exploration)
-    - [1.2 Lab: Simulating a 2:1 MUX using Icarus Verilog](#12-lab-simulating-a-21-mux-using-icarus-verilog)
-    - [1.3 Lab: Waveform Analysis using GTKWave](#13-lab-waveform-analysis-using-gtkwave)
-    - [1.4 Lab: Understanding the RTL & Testbench Source Code](#14-lab-understanding-the-rtl--testbench-source-code)
-  - [Day 2 — Introduction to Yosys & Logic Synthesis](#day-2--introduction-to-yosys--logic-synthesis)
-    - [2.1 Theory: What is Synthesis?](#21-theory-what-is-synthesis)
-    - [2.2 Theory: Understanding .lib & Cell Flavors](#22-theory-understanding-lib--cell-flavors)
-    - [2.3 Theory: Faster vs. Slower Cells — The Design Trade-off](#23-theory-faster-vs-slower-cells--the-design-trade-off)
-    - [2.4 Theory: Synthesis Verification Flow](#24-theory-synthesis-verification-flow)
-  - [Day 3 — Labs using Yosys & Sky130 PDK](#day-3--labs-using-yosys--sky130-pdk)
-    - [3.1 Lab: Invoking Yosys & Reading the Liberty File](#31-lab-invoking-yosys--reading-the-liberty-file)
-    - [3.2 Lab: Reading Verilog & Running Synthesis](#32-lab-reading-verilog--running-synthesis)
-    - [3.3 Lab: Viewing the Synthesized Netlist Schematic](#33-lab-viewing-the-synthesized-netlist-schematic)
-    - [3.4 Lab: Generating & Inspecting the Gate-Level Netlist](#34-lab-generating--inspecting-the-gate-level-netlist)
+- [Module 1: RTL Simulation & Logic Synthesis](#module-1-rtl-simulation--logic-synthesis)
+  - [Lab 1 — 2:1 MUX: Simulation & Waveform Analysis](#lab-1--21-mux-simulation--waveform-analysis)
+  - [Lab 2 — Synthesis Theory: RTL-to-Netlist Flow](#lab-2--synthesis-theory-rtl-to-netlist-flow)
+  - [Lab 3 — Yosys Synthesis with Sky130 PDK](#lab-3--yosys-synthesis-with-sky130-pdk)
 - [Module 2: Timing Libraries, Hierarchical Synthesis & Flop Coding Styles](#module-2-timing-libraries-hierarchical-synthesis--flop-coding-styles)
-  - [Day 4 — Introduction to Timing .lib](#day-4--introduction-to-timing-lib-sky130)
-    - [4.1 Lab: Opening & Exploring the Liberty File](#41-lab-opening--exploring-the-liberty-file)
-    - [4.2 Lab: Exploring Cell Definitions & Behavioral Models](#42-lab-exploring-cell-definitions--behavioral-models)
-    - [4.3 Lab: Understanding Timing Arcs & Delay Tables](#43-lab-understanding-timing-arcs--delay-tables)
-    - [4.4 Lab: Comparing Cell Flavors — Area vs. Power vs. Speed](#44-lab-comparing-cell-flavors--area-vs-power-vs-speed)
-  - [Day 5 — Hierarchical vs. Flat Synthesis](#day-5--hierarchical-vs-flat-synthesis)
-    - [5.1 Lab: Hierarchical Synthesis of multiple_modules](#51-lab-hierarchical-synthesis-of-multiple_modules)
-    - [5.2 Lab: Viewing the Hierarchical Netlist Schematic](#52-lab-viewing-the-hierarchical-netlist-schematic)
-    - [5.3 Lab: Flat Synthesis & Netlist Comparison](#53-lab-flat-synthesis--netlist-comparison)
-    - [5.4 Lab: Sub-Module Level Synthesis](#54-lab-sub-module-level-synthesis)
-  - [Day 6 — Various Flip-Flop Coding Styles & Optimization](#day-6--various-flip-flop-coding-styles--optimization)
-    - [6.1 Lab: Understanding Flop Coding Styles](#61-lab-understanding-flop-coding-styles-rtl-source)
-    - [6.2 Theory: Async vs. Sync Reset Behavior](#62-theory-async-vs-sync-reset-behavior)
-    - [6.3 Lab: Simulating Async Reset DFF](#63-lab-simulating-async-reset-dff--waveform-analysis)
-    - [6.4 Lab: Simulating Sync Reset DFF](#64-lab-simulating-sync-reset-dff--waveform-analysis)
-    - [6.5 Lab: Synthesizing Async Reset DFF](#65-lab-synthesizing-async-reset-dff)
-    - [6.6 Lab: Synthesizing Async Set DFF](#66-lab-synthesizing-async-set-dff)
-    - [6.7 Theory: Combined Sync/Async Reset Circuits](#67-theory-combined-syncasync-reset-circuits)
-    - [6.8 Lab: Special Case Optimizations](#68-lab-special-case-optimizations--multiplier-synthesis)
+  - [Lab 4 — Exploring the Sky130 Liberty File](#lab-4--exploring-the-sky130-liberty-file)
+  - [Lab 5 — Hierarchical vs. Flat Synthesis](#lab-5--hierarchical-vs-flat-synthesis)
+  - [Lab 6 — Flip-Flop Coding Styles & Special Optimizations](#lab-6--flip-flop-coding-styles--special-optimizations)
 - [Key Learnings & Observations](#-key-learnings--observations)
 - [Synthesis vs. Simulation — A Deep Comparison](#️-synthesis-vs-simulation--a-deep-comparison)
 - [Acknowledgements](#-acknowledgements)
 
 ---
 
-## About This Repository
+## About This Assessment
 
 This repository documents the complete output of a **12-hour hands-on RTL Design and Synthesis assessment** conducted as part of the **VSD (VLSI System Design) Squadron Internship**. The lab covers the full ASIC front-end design flow:
 
@@ -163,7 +132,7 @@ The SkyWater SKY130 is a 130nm open-source PDK defining real logic cells:
 
 > Using a real PDK means the synthesized netlist reflects **actual silicon area and timing**, not an abstract model.
 
-**Workshop directory structure:**
+**Assessment directory structure (on VSD VM):**
 ```
 sky130RTLDesignAndSynthesisWorkshop/
 ├── my_lib/
@@ -205,7 +174,7 @@ sky130RTLDesignAndSynthesisWorkshop/
 
 ---
 
-## Module 1: RTL Design & Synthesis Workshop
+## Module 1: RTL Simulation & Logic Synthesis
 
 > **Objective:** Understand the complete RTL-to-Netlist flow — from writing behavioral Verilog, simulating with Icarus Verilog, analyzing waveforms in GTKWave, and synthesizing gate-level netlists using Yosys with the SkyWater 130nm standard cell library.
 
@@ -226,7 +195,7 @@ flowchart LR
 
 ---
 
-### Day 1 — Introduction to Verilog RTL Design & Simulation
+### Lab 1 — 2:1 MUX: Simulation & Waveform Analysis
 
 <details>
 <summary><b>📖 Theory: What is RTL Design & Simulation?</b></summary>
@@ -385,7 +354,7 @@ endmodule
 
 ---
 
-### Day 2 — Introduction to Yosys & Logic Synthesis
+### Lab 2 — Synthesis Theory: RTL-to-Netlist Flow
 
 <details>
 <summary><b>📖 Theory Deep-Dive: The Complete Synthesis Flow</b></summary>
@@ -412,27 +381,28 @@ flowchart LR
 
 #### 2.1 Theory: What is Synthesis?
 
-<p align="center">
-  <img src="images/part41.png" alt="Introduction to Yosys" width="70%"/>
-</p>
-
 Synthesis is the **RTL-to-Gate-Level translation** performed by a synthesizer tool (Yosys). It takes:
 - **Input:** RTL design (behavioral Verilog) + Front-end standard cell library (`.lib`)
 - **Output:** A **netlist** — the same module re-expressed as interconnected standard cells
 
-<p align="center">
-  <img src="images/part53.png" alt="Synthesis concept — RTL to Netlist" width="70%"/>
-</p>
+```mermaid
+flowchart LR
+    RTL["RTL Design\n(good_mux.v)"] --> YOSYS["Yosys Synthesizer"]
+    LIB[".lib\n(sky130_fd_sc_hd)"] --> YOSYS
+    YOSYS --> NET["Gate-Level Netlist\n(good_mux_netlist.v)"]
+    YOSYS --> SCH["Schematic\n(Dot Viewer)"]
+    style RTL fill:#3498DB,stroke:#2471A3,color:#fff
+    style LIB fill:#F39C12,stroke:#D68910,color:#fff
+    style YOSYS fill:#E74C3C,stroke:#CB4335,color:#fff
+    style NET fill:#27AE60,stroke:#1E8449,color:#fff
+    style SCH fill:#8E44AD,stroke:#6C3483,color:#fff
+```
 
 > **Key Insight:** The design is converted into logic gates and their interconnections. The output file (netlist) is functionally equivalent to the original RTL but expressed in terms of actual physical gates from the target technology.
 
 ---
 
 #### 2.2 Theory: Understanding .lib & Cell Flavors
-
-<p align="center">
-  <img src="images/part54.png" alt="What is .lib — collection of standard cells" width="70%"/>
-</p>
 
 **`.lib` (Liberty File)** is a collection of logical modules, including basic gates (AND, OR, NOT, etc.) in **multiple flavors**:
 
@@ -449,9 +419,7 @@ Synthesis is the **RTL-to-Gate-Level translation** performed by a synthesizer to
 
 #### 2.3 Theory: Faster vs. Slower Cells — The Design Trade-off
 
-<p align="center">
-  <img src="images/part62.png" alt="Faster vs Slower Cells trade-off" width="70%"/>
-</p>
+In digital circuits, the load seen by a gate is the **capacitance** at its output. The speed of charging/discharging this capacitance determines the delay:
 
 ```mermaid
 flowchart TD
@@ -468,22 +436,14 @@ flowchart TD
 - **Faster cells** → Wider transistors → More current → Lower delay → **But higher area & power**
 - **Slower cells** → Narrow transistors → Less current → Higher delay → **But lower area & power**
 
-<p align="center">
-  <img src="images/part61.png" alt="Why we need slow cells — Hold time" width="70%"/>
-</p>
-
-> **Why do we need slow cells?**
-> - Fast cells are needed to meet **setup time** requirements (T_setup < T_clk - T_CQ - T_COMBI)
-> - Slow cells are needed to prevent **hold time** violations (T_HOLD < T_CQ + T_COMBI)
-> - The `.lib` collection provides **both** fast and slow variants so the synthesizer can balance these constraints.
+> **Why do we need BOTH fast and slow cells?**
+> - **Fast cells** are needed to meet **setup time** requirements: `T_setup < T_clk - T_CQ - T_COMBI`
+> - **Slow cells** are needed to prevent **hold time** violations: `T_HOLD < T_CQ + T_COMBI`
+> - The `.lib` collection provides both variants so the synthesizer can balance these constraints during timing closure.
 
 ---
 
 #### 2.4 Theory: Synthesis Verification Flow
-
-<p align="center">
-  <img src="images/part42.png" alt="Verify the synthesis — GLS flow" width="70%"/>
-</p>
 
 After synthesis, the gate-level netlist must be **verified** to ensure functional equivalence with the original RTL:
 
@@ -509,7 +469,7 @@ flowchart LR
 
 ---
 
-### Day 3 — Labs using Yosys & Sky130 PDK
+### Lab 3 — Yosys Synthesis with Sky130 PDK
 
 > **Objective:** Perform end-to-end logic synthesis of `good_mux.v` using Yosys with the SkyWater 130nm standard cell library, and generate a gate-level netlist mapped to real silicon cells.
 
@@ -685,7 +645,7 @@ flowchart LR
 
 ---
 
-### Day 4 — Introduction to Timing `.lib` (Sky130)
+### Lab 4 — Exploring the Sky130 Liberty File
 
 <details>
 <summary><b>📖 Theory: PVT Variations & Why .lib Matters</b></summary>
@@ -718,10 +678,6 @@ The library name `sky130_fd_sc_hd__tt_025C_1v80` decodes as:
 | `1v80` | 1.80V supply voltage |
 
 </details>
-
-<p align="center">
-  <img src="images/lib_3.png" alt="PVT variations diagram" width="50%"/>
-</p>
 
 ---
 
@@ -795,7 +751,7 @@ Each standard cell in the `.lib` has a corresponding Verilog behavioral model:
 
 ---
 
-### Day 5 — Hierarchical vs. Flat Synthesis
+### Lab 5 — Hierarchical vs. Flat Synthesis
 
 > **Objective:** Understand the difference between hierarchical synthesis (preserving module boundaries) and flat synthesis (dissolving all hierarchy), and analyze their impact on the resulting netlist.
 
@@ -893,13 +849,15 @@ Yosys also supports synthesizing individual sub-modules independently:
 
 ---
 
-### Day 6 — Various Flip-Flop Coding Styles & Optimization
+### Lab 6 — Flip-Flop Coding Styles & Special Optimizations
 
 > **Objective:** Explore different D flip-flop coding styles (asynchronous reset, asynchronous set, synchronous reset), simulate their behavior, synthesize them, and study special-case optimizations.
 
 <details>
 <summary><b>📖 Theory: Why Flip-Flops? — Combating Glitches in Combinational Logic</b></summary>
 <br>
+
+Combinational circuits produce **glitches** due to propagation delays through different signal paths. Flip-flops **shield** downstream logic by sampling data only on clock edges.
 
 ```mermaid
 flowchart LR
@@ -916,21 +874,16 @@ flowchart LR
     style COMB4 fill:#27AE60,stroke:#1E8449,color:#fff
 ```
 
-- Combinational circuits produce **glitches** due to propagation delays through different signal paths
-- Flip-flops **shield** downstream logic by sampling data only on clock edges
+**Key Concepts:**
+- **Asynchronous reset/set** → control signal is in the sensitivity list (`always @(posedge clk, posedge reset)`) → Yosys selects cells with dedicated async pins (`dfrtp_1`, `dfstp_1`)
+- **Synchronous reset** → control signal is only checked inside the `if` block of `posedge clk` → Yosys uses a plain DFF + MUX at D input
 - Reset/Set pins provide **known initialization states** to prevent undefined behavior at power-up
 
 </details>
 
 ---
 
-#### 6.1 Lab: Understanding Flop Coding Styles (RTL Source)
-
-<p align="center">
-  <img src="images/flop_1.png" alt="All flip-flop coding styles — async reset, async set, sync reset" width="100%"/>
-</p>
-
-Three fundamental flip-flop designs explored:
+#### 6.1 RTL Source: Flip-Flop Coding Styles
 
 <details>
 <summary><b>📄 Asynchronous Reset DFF — <code>dff_asyncres.v</code></b></summary>
@@ -985,18 +938,6 @@ endmodule
 ---
 
 #### 6.2 Theory: Async vs. Sync Reset Behavior
-
-<p align="center">
-  <img src="images/flop_2.png" alt="Async reset — irrespective of clock, D-FF with async reset waveform" width="100%"/>
-</p>
-
-<p align="center">
-  <img src="images/flop_3.png" alt="Sync reset — D pin of flop, sync/async comparison" width="100%"/>
-</p>
-
-<p align="center">
-  <img src="images/flop_4.png" alt="Sync/Async reset circuit diagrams" width="70%"/>
-</p>
 
 > **Key Differences:**
 >
@@ -1086,13 +1027,10 @@ yosys> show
 
 #### 6.7 Theory: Combined Sync/Async Reset Circuits
 
-<p align="center">
-  <img src="images/flop_11.png" alt="Combined sync and async reset circuit diagrams" width="70%"/>
-</p>
-
 > A design can combine **both** synchronous and asynchronous resets. In such cases:
 > - The **async reset** connects directly to the flop's `RESET_B` pin
 > - The **sync reset** feeds through a MUX at the D input, selecting between `1'b0` and the data
+> - This creates a `dff_asyncres_syncres` topology: async for power-on safety, sync for datapath control
 
 ---
 
@@ -1182,7 +1120,7 @@ The Boolean satisfiability and BDD optimizations in the ABC engine allow reducin
 ---
 
 <p align="center">
-  <b>Workshop completed using: Icarus Verilog · GTKWave · Yosys 0.7 · SkyWater SKY130 PDK · Ubuntu (VSD VM)</b>
+  <b>Assessment completed using: Icarus Verilog · GTKWave · Yosys 0.7 · SkyWater SKY130 PDK · Ubuntu (VSD VM)</b>
 </p>
 
 <p align="center">

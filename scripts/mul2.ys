@@ -1,0 +1,9 @@
+# Yosys Synthesis Script — mul2 (Multiply by 2)
+# Target: SkyWater SKY130 Standard Cell Library
+
+read_liberty -lib ../my_lib/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog mult_2.v
+synth -top mul2
+abc -liberty ../my_lib/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+write_verilog -noattr mul2_netlist.v

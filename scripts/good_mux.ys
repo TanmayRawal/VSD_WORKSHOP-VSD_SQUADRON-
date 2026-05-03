@@ -1,0 +1,9 @@
+# Yosys Synthesis Script — good_mux
+# Target: SkyWater SKY130 Standard Cell Library
+
+read_liberty -lib ../my_lib/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog good_mux.v
+synth -top good_mux
+abc -liberty ../my_lib/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+write_verilog -noattr good_mux_netlist.v

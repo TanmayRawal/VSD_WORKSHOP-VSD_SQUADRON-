@@ -1,0 +1,7 @@
+https://github.com/gowdanayu/soc-design-and-planning-vsd
+
+https://github.com/Gurupavan-Deetige/Sky130-CMOS-Design-Workshop
+
+https://github.com/vrinda-karuvanchery/vsdsquadron-soc
+
+https://github.com/arunkpv/vsd-hdp
